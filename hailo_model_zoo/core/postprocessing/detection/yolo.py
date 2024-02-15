@@ -91,7 +91,7 @@ class YoloPostProc(object):
                                          max_total_size=100)
 
         nmsed_classes = tf.cast(tf.add(nmsed_classes, self._labels_offset), tf.int16)
-        [nmsed_classes] = tf.py_function(translate_coco_2017_to_2014, [nmsed_classes], ['int32'])
+        #[nmsed_classes] = tf.py_function(translate_coco_2017_to_2014, [nmsed_classes], ['int32'])
         return {'detection_boxes': nmsed_boxes,
                 'detection_scores': nmsed_scores,
                 'detection_classes': nmsed_classes,
@@ -161,7 +161,7 @@ class YoloPostProc(object):
             return np.vectorize(COCO_2017_TO_2014_TRANSLATION.get)(nmsed_classes).astype(np.int32)
 
         nmsed_classes = tf.cast(tf.add(nmsed_classes, self._labels_offset), tf.int16)
-        [nmsed_classes] = tf.py_function(translate_coco_2017_to_2014, [nmsed_classes], ['int32'])
+        #[nmsed_classes] = tf.py_function(translate_coco_2017_to_2014, [nmsed_classes], ['int32'])
         nmsed_classes.set_shape((BS, 100))
 
         return {'detection_boxes': nmsed_boxes,
